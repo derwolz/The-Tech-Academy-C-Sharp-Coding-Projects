@@ -1,0 +1,66 @@
+﻿<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-12 col-lg-6 shadow mx-auto d-block" id="NameForm">
+        <div class="card-header text-center">
+            <h5 class="m-0">Let's get started with that quote</h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="text" name="fname" placeholder="First Name" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" name="lname" placeholder="Last Name" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="email" name="email" placeholder="Something@Somewhere.com" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="date" name="dob" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-3"></div>
+                    
+
+                </div>
+      
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="number" name="year" placeholder="1998" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" name="make" placeholder="Honda" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" name="carmodel" placeholder="Civic" class="form-control" />
+                    </div>
+                    
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Would you like full coverage?</label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.CheckBox("coverage")
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Have you ever had a DUI</label>
+                        </div>
+                        <div class="form-group col-md-6">
+                                @Html.CheckBox("dui")
+                        </div>
+                        <div class="form-group col-md-12">
+                                <label>How many tickets have you recieved</label>
+                                <input type="number" name="ticket" placeholder="0" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-3"></div>
+                            <div class="form-group col-md-6">
+                                <button type="submit" name="Next2" class="btn btn-block bg-info">Next</button>
+                            </div>
+
+                        </div>
+            }
+        </div>
+    </div>
+</div>
