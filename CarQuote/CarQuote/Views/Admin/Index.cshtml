@@ -1,0 +1,30 @@
+﻿@using CarQuote.ViewModel
+@model List<CustomerVM>
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+<div class="row m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6">
+        <div class="card-header text-center">
+            <h3>
+                Quotes collected
+            </h3>
+        </div>
+        <div class="card-body">
+
+            @foreach (var person in Model)
+            {
+                
+            <div class="col-md-3">
+                @person.FirstName
+                @person.LastName
+                @person.EmailAddress
+                @person.GetQuote()
+            </div>
+            }
+        </div>
+    </div>
+</div>
+

@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="EntryId" />
           </Key>
-          <Property Name="EntryId" Type="int" Nullable="false" />
+          <Property Name="EntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Make" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CarYear" Type="int" Nullable="false" />
