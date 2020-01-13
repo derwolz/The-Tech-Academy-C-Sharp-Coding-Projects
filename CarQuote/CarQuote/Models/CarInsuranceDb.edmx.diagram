@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="92bdd0dc18424f01acd128f56afc7cc9" Name="Diagram1">
-        <EntityTypeShape EntityType="CarInsuranceModel.Customer" Width="1.5" PointX="2.375" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarInsuranceModel.CustomerCar" Width="1.5" PointX="5.5" PointY="5.25" />
-        <EntityTypeShape EntityType="CarInsuranceModel.CustomerRecord" Width="1.5" PointX="5.625" PointY="2.625" />
+        <EntityTypeShape EntityType="CarInsuranceModel.Customer" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="CarInsuranceModel.CustomerCar" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="CarInsuranceModel.CustomerRecord" Width="1.5" PointX="3" PointY="4" />
         <AssociationConnector Association="CarInsuranceModel.fk_CustomerId" />
         <AssociationConnector Association="CarInsuranceModel.fk_CustomerId2" />
       </Diagram>

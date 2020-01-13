@@ -4,25 +4,47 @@
     ViewBag.Title = "Admin";
 }
 
-<h2>Admin</h2>
+<h2 class="text-center">Admin Page</h2>
 <div class="row m-3">
-    <div class="card col-sm-12 col-md-10 col-lg-6">
-        <div class="card-header text-center">
-            <h3>
-                Quotes collected
-            </h3>
+    <div class="card col-sm-14 col-md-12 col-lg-8 mx-auto">
+        <div class="card-header ">
+            <h5>
+                <div class="row">
+                    <div class="col-md-2">
+                        First name
+                    </div>
+                    <div class="col-md-3">
+                        Last Name
+                    </div>
+                    <div class="col-md-4">
+                        Email
+                    </div>
+                    <div class="col-md-3">
+                        Quote Amount
+                    </div>
+                </div>
+            </h5>
         </div>
         <div class="card-body">
-
+            
             @foreach (var person in Model)
             {
-                
-            <div class="col-md-3"> <!--Basic List-->
-                @person.FirstName
-                @person.LastName
-                @person.EmailAddress
-                @person.GetQuote()
-            </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @person.FirstName
+                    </div>
+                    <div class="col-md-3">
+                        @person.LastName
+                    </div>
+                    <div class="col-md-4">
+                        @person.EmailAddress
+                    </div>
+                    <div class="col-md-3">
+                        @person.GetQuote()
+                    </div>
+
+                </div>
+                <hr />
             }
         </div>
     </div>

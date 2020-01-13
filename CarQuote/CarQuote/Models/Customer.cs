@@ -21,11 +21,11 @@ namespace CarQuote.Models
             this.CustomerRecords = new HashSet<CustomerRecord>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        public Nullable<System.DateTime> DateofBirth { get; set; }
+        public System.DateTime DateofBirth { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerCar> CustomerCars { get; set; }

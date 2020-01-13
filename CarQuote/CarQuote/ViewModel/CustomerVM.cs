@@ -19,9 +19,9 @@ namespace CarQuote.ViewModel
         public bool DUI { get; set; }
         public int NumofTicket { get; set; }
 
-        public double GetQuote()
+        public string GetQuote()
         {
-            double Quote = 50f;
+            Double Quote = 50d;
             if (Birthday > DateTime.Now.AddYears(-25)) Quote += 25;
             if (Birthday > DateTime.Now.AddYears(-18)) Quote += 100;
             if (Birthday < DateTime.Now.AddYears(-100)) Quote += 100;
@@ -31,7 +31,10 @@ namespace CarQuote.ViewModel
             for (int i = 0; i < NumofTicket; i++) Quote += 10;
             if (DUI == true) Quote *= 1.25;
             if (FullCoverage == true) Quote *= 1.5;
-            return Quote;
+            Decimal QuoteActual = (Decimal)Quote;
+            
+
+            return String.Format("{0:C}", QuoteActual);
         }
     }
 }

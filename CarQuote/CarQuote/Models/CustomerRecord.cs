@@ -14,10 +14,10 @@ namespace CarQuote.Models
     
     public partial class CustomerRecord
     {
-        public int EntryId { get; set; }
+        public int RecordID { get; set; }
+        public string CustomerId { get; set; }
         public bool DUI { get; set; }
         public bool FullCoverage { get; set; }
-        public Nullable<int> CustomerId { get; set; }
         public int NumofTicket { get; set; }
     
         public virtual Customer Customer { get; set; }

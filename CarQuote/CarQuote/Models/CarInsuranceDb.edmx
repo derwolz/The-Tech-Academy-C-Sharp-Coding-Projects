@@ -9,34 +9,34 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="50" />
-          <Property Name="LastName" Type="varchar" MaxLength="50" />
-          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
-          <Property Name="DateofBirth" Type="date" />
+          <Property Name="Id" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateofBirth" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerCar">
           <Key>
-            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="CarId" />
           </Key>
-          <Property Name="EntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Make" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CarYear" Type="int" Nullable="false" />
-          <Property Name="CustomerId" Type="int" />
         </EntityType>
         <EntityType Name="CustomerRecord">
           <Key>
-            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="RecordID" />
           </Key>
-          <Property Name="EntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="varchar" MaxLength="38" Nullable="false" />
           <Property Name="DUI" Type="bit" Nullable="false" />
           <Property Name="FullCoverage" Type="bit" Nullable="false" />
           <Property Name="NumofTicket" Type="int" Nullable="false" />
-          <Property Name="CustomerId" Type="int" />
         </EntityType>
         <Association Name="fk_CustomerId">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="CustomerCar" Type="Self.CustomerCar" Multiplicity="*" />
@@ -50,7 +50,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_CustomerId2">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="CustomerRecord" Type="Self.CustomerRecord" Multiplicity="*" />
@@ -80,20 +80,8 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarInsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="CustomerCars" Relationship="CarInsuranceModel.fk_CustomerId" FromRole="Customer" ToRole="CustomerCar" />
-          <NavigationProperty Name="CustomerRecords" Relationship="CarInsuranceModel.fk_CustomerId2" FromRole="Customer" ToRole="CustomerRecord" />
-        </EntityType>
         <EntityContainer Name="CarInsuranceEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Customers" EntityType="CarInsuranceModel.Customer" />
           <EntitySet Name="CustomerCars" EntityType="CarInsuranceModel.CustomerCar" />
           <EntitySet Name="CustomerRecords" EntityType="CarInsuranceModel.CustomerRecord" />
           <AssociationSet Name="fk_CustomerId" Association="CarInsuranceModel.fk_CustomerId">
@@ -105,30 +93,42 @@
             <End Role="CustomerRecord" EntitySet="CustomerRecords" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CustomerCars" Relationship="CarInsuranceModel.fk_CustomerId" FromRole="Customer" ToRole="CustomerCar" />
+          <NavigationProperty Name="CustomerRecords" Relationship="CarInsuranceModel.fk_CustomerId2" FromRole="Customer" ToRole="CustomerRecord" />
+        </EntityType>
         <EntityType Name="CustomerCar">
           <Key>
-            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="CarId" />
           </Key>
-          <Property Name="EntryId" Type="Int32" Nullable="false" />
-          <Property Name="Make" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="CarInsuranceModel.fk_CustomerId" FromRole="CustomerCar" ToRole="Customer" />
+          <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CarYear" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="CarInsuranceModel.fk_CustomerId" FromRole="CustomerCar" ToRole="Customer" />
         </EntityType>
         <EntityType Name="CustomerRecord">
           <Key>
-            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="RecordID" />
           </Key>
-          <Property Name="EntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
           <Property Name="DUI" Type="Boolean" Nullable="false" />
           <Property Name="FullCoverage" Type="Boolean" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="CarInsuranceModel.fk_CustomerId2" FromRole="CustomerRecord" ToRole="Customer" />
           <Property Name="NumofTicket" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="CarInsuranceModel.fk_CustomerId2" FromRole="CustomerRecord" ToRole="Customer" />
         </EntityType>
         <Association Name="fk_CustomerId">
-          <End Type="CarInsuranceModel.Customer" Role="Customer" Multiplicity="0..1">
+          <End Type="CarInsuranceModel.Customer" Role="Customer" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="CarInsuranceModel.CustomerCar" Role="CustomerCar" Multiplicity="*" />
@@ -142,7 +142,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_CustomerId2">
-          <End Type="CarInsuranceModel.Customer" Role="Customer" Multiplicity="0..1">
+          <End Type="CarInsuranceModel.Customer" Role="Customer" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="CarInsuranceModel.CustomerRecord" Role="CustomerRecord" Multiplicity="*" />
@@ -164,11 +164,11 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="CarInsuranceModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -176,10 +176,10 @@
             <EntityTypeMapping TypeName="CarInsuranceModel.CustomerCar">
               <MappingFragment StoreEntitySet="CustomerCar">
                 <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="Make" ColumnName="Make" />
-                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -187,10 +187,10 @@
             <EntityTypeMapping TypeName="CarInsuranceModel.CustomerRecord">
               <MappingFragment StoreEntitySet="CustomerRecord">
                 <ScalarProperty Name="NumofTicket" ColumnName="NumofTicket" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="FullCoverage" ColumnName="FullCoverage" />
                 <ScalarProperty Name="DUI" ColumnName="DUI" />
-                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

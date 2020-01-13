@@ -14,10 +14,10 @@ namespace CarQuote.Models
     
     public partial class CustomerCar
     {
-        public int EntryId { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        public int CarId { get; set; }
+        public string CustomerId { get; set; }
+        public string CarMake { get; set; }
+        public string CarModel { get; set; }
         public int CarYear { get; set; }
     
         public virtual Customer Customer { get; set; }
