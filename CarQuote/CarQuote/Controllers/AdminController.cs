@@ -1,5 +1,6 @@
 ﻿using CarQuote.Models;
 using CarQuote.ViewModel;
+using Microsoft.CodeAnalysis.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,23 +19,25 @@ namespace CarQuote.Controllers
                 
                 List<CustomerVM> Customers = new List<CustomerVM>();
 
+                var persons = (from c in db.Customers                       //create Table object joined with CustomerCars and CustomerRecords
+                               join d in db.CustomerCars on c.Id equals d.CustomerId
+                               join e in db.CustomerRecords on c.Id equals e.CustomerId
+                               select new
+                {
+                    c.FirstName,
+                    c.LastName,
+                    c.EmailAddress,
+                    c.DateofBirth,
+                    d.CarYear,
+                    d.Make,
+                    d.Model,
+                    e.DUI,
+                    e.FullCoverage,
+                    e.NumofTicket,
+                    person = c.Id
+                }).ToList();
                 
-                foreach (var person in (from c in db.Customers
-                                        join d in db.CustomerCars on c.Id equals d.CustomerId
-                                        join e in db.CustomerRecords on c.Id equals e.CustomerId
-                                        select new
-                                        {
-                                            c.FirstName,
-                                            c.LastName,
-                                            c.EmailAddress,
-                                            c.DateofBirth,
-                                            d.CarYear,
-                                            d.Make,
-                                            d.Model,
-                                            e.DUI,
-                                            e.FullCoverage,
-                                            e.NumofTicket
-                                        }).ToList())
+                foreach (var person in persons)                             //Iterate through the table mapping it to View Model Object
                 {
                     CustomerVM Customer = new CustomerVM
                     {

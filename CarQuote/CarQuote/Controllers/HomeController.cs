@@ -17,11 +17,11 @@ namespace CarQuote.Controllers
         [HttpPost]
         public ActionResult SignUp(string fname, string lname,string email, DateTime dob, int year, string make, string carmodel, bool coverage, bool dui, int ticket)
         {
-            if (fname != "" || lname != "" || email != null || year <= DateTime.Today.Year || carmodel != "" || make != "" )
+            if (fname != "" || lname != "" || email != null || year <= DateTime.Today.Year || year > DateTime.Today.AddYears(-130).Year || carmodel != "" || make != "" ) //check for null values
             {
                 using (CarInsuranceEntities db = new CarInsuranceEntities())
                 {
-                    var signUpCustomer = new Customer();
+                    var signUpCustomer = new Customer();            //Mapping objects instantiated for all three tables
                     var signupCar = new CustomerCar();
                     var signupRecord = new CustomerRecord();
                     signUpCustomer.DateofBirth = dob;
