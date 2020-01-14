@@ -207,7 +207,6 @@
     <Compile Include="Models\CustomerRecord.cs">
       <DependentUpon>CarInsuranceDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Quoter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
   </ItemGroup>
